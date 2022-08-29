@@ -36,7 +36,7 @@ for specific_operation in input().split(','):
 input_data = input()
 data = []
 iteration_count = 0
-
+print(input_data)
 for item in input_data.split(', '):
     inner_list = []
     if item.isnumeric():
