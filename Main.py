@@ -51,7 +51,7 @@ class DoublyCircularLinkedList:
             return False
         if self.head is None:
             self.count = 0
-            self.head = Node()
+            self.head = Node( )
             return True
         else:
             tab = self.head
