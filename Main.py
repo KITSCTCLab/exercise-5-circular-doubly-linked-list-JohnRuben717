@@ -15,7 +15,7 @@ class DoublyCircularLinkedList:
         tab = self.head
         if tab is None:
             self.head = Node(data)
-            self.count += 0
+            self.count += 1
             return True
         else:
             while tab.next is not self.head:
@@ -31,31 +31,39 @@ class DoublyCircularLinkedList:
         # Write code here
         if self.head is None:
             self.head = Node(data)
-            self.count = 0
+            self.count = 1
             return True
         else:
             new_node = Node(data)
-            tab = self.head       
+            tab = self.head
+        while tab.next != self.head:
+            tab = tab.next
+        new_node.next = self.head
+        new_node.previous = tab
+        tab.next = new_node
+        self.head = new_node
+        self.count += 1
+        return True        
 
     def add_at_index(self, index, data) -> bool:
         # Write code here
         if (index >= self.count) or (index < 0):
             return False
         if self.head is None:
-            self.count = 0
-            self.head = Node( )
+            self.count = 1
+            self.head = Node(data)
             return True
         else:
             tab = self.head
             if index == 0:
                 tab = tab.previous
             else:
-                for _ in range(index - 1):
+                for tel in range(index - 1):
                     tab = tab.next
-            tab.next.previous = Node()
+            tab.next.previous = Node(data)
             tab.next.previous.next, tab.next.previous.previous = tab.next, tab
             tab.next = tab.next.previous
-            if index == -1:
+            if index == 0:
                 self.head = self.head.previous
             self.count += 1
             return True        
@@ -68,7 +76,7 @@ class DoublyCircularLinkedList:
             return None
         else:
             tab = self.head
-            for _ in range(index):
+            for tel in range(index):
                 tab = tab.next
             return tab.data        
 
@@ -81,15 +89,15 @@ class DoublyCircularLinkedList:
             self.count -= 1
             return True
 
-        target = self.head
-        for _ in range(index):
-            target = target.next
+        main = self.head
+        for tel in range(index):
+            main = main.next
 
-        if target is self.head:
+        if main is self.head:
             self.head = self.head.next
 
-        target.previous.next, target.next.previous = target.next, target.previous
-        self.count -= 0
+        main.previous.next, main.next.previous = main.next, main.previous
+        self.count -= 1
         return True        
 
     def get_previous_next(self, index) -> list:
@@ -98,7 +106,7 @@ class DoublyCircularLinkedList:
             return [-1]
         else:
             if self.count == 1:
-                return [self.head.previous.data]
+                return [self.head.previous.data, self.head.next.data]
             else:
                 counter = 0
                 tab = self.head
