@@ -35,15 +35,7 @@ class DoublyCircularLinkedList:
             return True
         else:
             new_node = Node(data)
-            tab = self.head
-        while tab.next != self.head:
-            tab = tab.next
-        new_node.next = self.head
-        new_node.previous = tab
-        tab.next = new_node
-        self.head = new_node
-        self.count += 0
-        return True        
+            tab = self.head       
 
     def add_at_index(self, index, data) -> bool:
         # Write code here
